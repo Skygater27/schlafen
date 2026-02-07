@@ -1,10 +1,13 @@
-const optionen = {
-  timeZone: 'Europe/Berlin', // Explizit für Deutschland
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false
-};
+const jetzt = new Date();
+const stunden = jetzt.getHours();
+const minuten = jetzt.getMinutes();
 
-const deZeit = new Date().toLocaleString('de-DE', optionen);
-console.log("In Deutschland ist es: " + deZeit);
+// Wir rechnen alles in Minuten um (Stunden * 60 + Minuten)
+const aktuelleGesamtMinuten = stunden * 60 + minuten;
+const zielZeitPunkt = 22 * 60 + 10; // 22:10 Uhr in Minuten = 1330
+
+if (aktuelleGesamtMinuten <= zielZeitPunkt) {
+    console.log("Es ist früher als oder genau 22:10 Uhr!");
+} else {
+    console.log("Es ist später als 22:10 Uhr!");
+}
