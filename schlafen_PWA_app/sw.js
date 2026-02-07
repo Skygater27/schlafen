@@ -1,0 +1,9 @@
+const cacheName = 'schlafen-app-v1';
+const assets = ['./', './index.html', './style.css', './app.js'];
+
+self.addEventListener('install', (e) => {
+    e.waitUntil(caches.open('v1').then(cache => cache.addAll(['/', 'index.html', 'style.css', 'app.js'])));
+});
+self.addEventListener('fetch', (e) => {
+    e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+});
