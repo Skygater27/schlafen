@@ -1,4 +1,4 @@
-const cacheName = 'schlafen-app-v2';
+const cacheName = 'schlafen-app-v3';
 const assets = [
   './',
   './index.html',
@@ -23,4 +23,5 @@ self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((res) => res || fetch(e.request))
   );
+
 });
