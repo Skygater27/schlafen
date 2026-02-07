@@ -1,4 +1,4 @@
-const cacheName = 'schlafen-app-v6';
+const cacheName = 'schlafen-app-v7';
 const assets = [
   './',
   './index.html',
@@ -48,3 +48,4 @@ self.addEventListener('fetch', (e) => {
     })
   );
 });
+
