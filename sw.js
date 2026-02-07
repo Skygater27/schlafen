@@ -1,12 +1,4 @@
-self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Erzwingt, dass der neue SW sofort aktiv wird
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim()); // Übernimmt sofort die Kontrolle über alle offenen Tabs
-});
-
-const cacheName = 'schlafen-app-v5';
+const cacheName = 'schlafen-app-v6';
 const assets = [
   './',
   './index.html',
@@ -18,7 +10,9 @@ const assets = [
   './img/icon-512.png'
 ];
 
+// 1. Installation: Dateien speichern & nicht warten
 self.addEventListener('install', (e) => {
+  self.skipWaiting(); // Macht diesen SW sofort zum "Chef"
   e.waitUntil(
     caches.open(cacheName).then((cache) => {
       console.log('Caching assets...');
@@ -27,12 +21,30 @@ self.addEventListener('install', (e) => {
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+// 2. Aktivierung: Alte Caches löschen
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    Promise.all([
+      clients.claim(), // Übernimmt sofort die Kontrolle
+      caches.keys().then((keys) => {
+        return Promise.all(
+          keys.map((key) => {
+            if (key !== cacheName) {
+              console.log('Lösche alten Cache:', key);
+              return caches.delete(key);
+            }
+          })
+        );
+      })
+    ])
   );
-
 });
 
-
-
+// 3. Fetch: Dateien aus dem Cache servieren
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((res) => {
+      return res || fetch(e.request);
+    })
+  );
+});
