@@ -1,3 +1,11 @@
+self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Erzwingt, dass der neue SW sofort aktiv wird
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(clients.claim()); // Übernimmt sofort die Kontrolle über alle offenen Tabs
+});
+
 const cacheName = 'schlafen-app-v3';
 const assets = [
   './',
@@ -25,3 +33,4 @@ self.addEventListener('fetch', (e) => {
   );
 
 });
+
