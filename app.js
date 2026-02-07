@@ -1,21 +1,10 @@
-// Wartet, bis das gesamte HTML geladen ist
-window.addEventListener('load', () => {
-    
-    // PWA Registrierung
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-    }
+const optionen = {
+  timeZone: 'Europe/Berlin', // Explizit für Deutschland
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false
+};
 
-    let sekunden = 0;
-    const anzeige = document.getElementById('zaehler-anzeige');
-
-    if (anzeige) {
-        setInterval(() => {
-            sekunden++;
-            anzeige.innerText = sekunden;
-            console.log("Sekunden:", sekunden);
-        }, 1000);
-    } else {
-        console.error("Fehler: Das Element 'zaehler-anzeige' wurde nicht gefunden!");
-    }
-});
+const deZeit = new Date().toLocaleString('de-DE', optionen);
+console.log("In Deutschland ist es: " + deZeit);
