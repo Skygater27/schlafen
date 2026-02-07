@@ -7,7 +7,8 @@ const aktuelleGesamtMinuten = stunden * 60 + minuten;
 const zielZeitPunkt = 22 * 60 + 10; // 22:10 Uhr in Minuten = 1330
 
 if (aktuelleGesamtMinuten <= zielZeitPunkt) {
-    console.log("Es ist früher als oder genau 22:10 Uhr!");
+    document.body.style.color = "white";
 } else {
-    console.log("Es ist später als 22:10 Uhr!");
+    document.body.style.color = "black";
 }
+
