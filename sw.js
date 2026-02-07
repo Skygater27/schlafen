@@ -6,7 +6,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(clients.claim()); // Übernimmt sofort die Kontrolle über alle offenen Tabs
 });
 
-const cacheName = 'schlafen-app-v3';
+const cacheName = 'schlafen-app-v4';
 const assets = [
   './',
   './index.html',
@@ -33,4 +33,5 @@ self.addEventListener('fetch', (e) => {
   );
 
 });
+
 
