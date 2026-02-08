@@ -5,7 +5,7 @@ function checkTime() {
     
     // Wir rechnen alles in Minuten um (Stunden * 60 + Minuten)
     const aktuelleGesamtMinuten = stunden * 60 + minuten;
-    const aufstehZeit = 6 * 60 + 0; // 6:00 Uhr in Minuten = 360
+    const aufstehZeit = 5 * 60 + 0; // 6:00 Uhr in Minuten = 360
     const schlafensZeit = 21 * 60 + 30;
 
     const body = document.body;
@@ -23,3 +23,4 @@ function checkTime() {
 window.addEventListener('DOMContentLoaded', () => {
     checkTime();
 });
+
